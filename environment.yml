@@ -1,0 +1,13 @@
+name: titanic-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pandas
+  - numpy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - xgboost
