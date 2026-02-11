@@ -12,15 +12,16 @@ The ensemble model significantly outperformed individual baselines by correcting
 
 | Model Architecture | CV Accuracy | Kaggle Score (Public LB) |
 | :--- | :--- | :--- |
-| Random Forest | 81.2% | 0.775 |
-| XGBoost | 82.1% | 0.779 |
-| **Voting Ensemble (Final)** | **83.5%** | **0.794 (Rank ~600)** |
+| Random Forest | 85.4% | - |
+| XGBoost | 86.7% | 0.779 |
+| Logistic Regression | 86.7% | - |
+| **Voting Ensemble (Final)** | **86.5%** | **0.794 (Rank ~600)** |
 
 ## The Approach
 
 ### 1. Advanced Feature Engineering
 * **Family Survival Groups:** Instead of treating passengers as isolated data points, I grouped them by Surname/Ticket. If a family member survived, the probability of others surviving increases drastically. This single feature boosted model confidence by ~3%.
-* **Custom Binning:** Implemented "Human-Logic" binning for Age (Child vs. Adult) and Family Size to capture non-linear survival rates (e.g., small families survive more than solo travelers or large clans).
+* **Custom Binning:** Implemented "Human-Logic" binning for Age (Child vs. Adult) and Family Size to capture non-linear survival rates. Binning is not applicable to decision tree models, but greatly improved the Logistic Regression model's performance. 
 
 ### 2. Model Architecture
 I used a **Voting Classifier** to combine three distinct "expert" models:
