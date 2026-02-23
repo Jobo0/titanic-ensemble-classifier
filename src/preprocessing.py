@@ -83,6 +83,11 @@ def engineer_features(df):
 def feat_eng_transformer():
     return FunctionTransformer(engineer_features, validate=False)
 
+def cat_transformer():
+    return Pipeline([
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+
 def sex_transformer():
     """
     Returns an OrdinalEncoder() pipeline
