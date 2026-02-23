@@ -182,3 +182,55 @@ def create_family_survival_feature(df_train, df_test):
     test_with_feature = full_data[full_data['dataset'] == 'test'].copy()
     
     return train_with_feature, test_with_feature
+    
+def custom_age_binning(X):
+    # Ensure we are working with a DataFrame/Series
+    X = pd.DataFrame(X).copy()
+    
+    # Fill NaNs first (Critical step before binning!)
+    X = X.fillna(X.median())
+    
+    # Define your specific cut points
+    # Bins: [0-12, 12-18, 18-60, 60+]
+    bins = [0,3,6,10,14,20,25,30,40,55,np.inf]
+    labels = ['Infant', 'Small_child', 'Medium_child', 'Large_child','Adolescent','Young adult','Adult','Old adult','Older adult','Senior']
+    
+    # Apply the cut
+    # We use .astype(str) because OneHotEncoder needs strings, not Categories
+    X_binned = pd.cut(X.iloc[:, 0], bins=bins, labels=labels).astype(str).values.reshape(-1, 1)
+    
+    return pd.DataFrame(X_binned)
+
+def bin_family_size(X):
+    # Ensure we are working with a DataFrame/Series
+    X = pd.DataFrame(X).copy()
+    
+    # Define your specific cut points
+    # Bins: [0-12, 12-18, 18-60, 60+]
+    bins = [-1, 1, 4, 20]
+    labels = ['Solo', 'Small', 'Large']
+    
+    # Apply the cut
+    # We use .astype(str) because OneHotEncoder needs strings, not Categories
+    X_binned = pd.cut(X.iloc[:, 0], bins=bins, labels=labels).astype(str).values.reshape(-1, 1)
+    
+    return pd.DataFrame(X_binned)
+
+def age_binning_transformer():
+    return Pipeline([
+        # We use FunctionTransformer to call our custom function
+        ('custom_bins', FunctionTransformer(custom_age_binning, validate=False, feature_names_out="one-to-one")),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+
+def family_size_transformer():
+    return Pipeline([
+        ('func', FunctionTransformer(bin_family_size, validate=False, feature_names_out="one-to-one")),
+        ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
+
+def fare_bin_transformer():
+    return Pipeline([
+        ('imputer', SimpleImputer(strategy='median')),
+        ('binning', KBinsDiscretizer(n_bins=5, encode='onehot', strategy='quantile', quantile_method='averaged_inverted_cdf'))
+    ])

@@ -8,14 +8,14 @@ This project moves beyond standard tutorials by implementing a **Voting Ensemble
 
 ## Key Results
 
-The ensemble model significantly outperformed individual baselines by correcting for the high variance of tree-based models.
+The ensemble model significantly outperformed individual baselines.
 
 | Model Architecture | CV Accuracy | Kaggle Score (Public LB) |
 | :--- | :--- | :--- |
 | Random Forest | 85.4% | - |
 | XGBoost | 86.7% | 0.779 |
 | Logistic Regression | 86.7% | - |
-| **Voting Ensemble (Final)** | **86.5%** | **0.794 (Rank ~600)** |
+| **Voting Ensemble (Final)** | **86.5%** | **0.794 (Rank ~600 / 12000)** |
 
 ## The Approach
 
@@ -60,8 +60,8 @@ This project uses **Conda** for dependency management to ensure reproducibility.
 
 2. **Open the notebooks:**
 
-- `notebooks/01_Exploratory_Analysis.ipynb`: Detailed EDA, feature correlation heatmaps, and initial experiments.
-- `notebooks/02_Final_Pipeline.ipynb`: The clean, production-ready pipeline that generates the final submission.
+- `01_Exploratory_Analysis.ipynb`: Detailed EDA, feature correlation heatmaps, and initial experiments.
+- `02_Final_Pipeline.ipynb`: The clean, production-ready pipeline that generates the final submission.
 
 ## Project Structure
 
