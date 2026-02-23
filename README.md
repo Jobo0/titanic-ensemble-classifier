@@ -12,10 +12,10 @@ The ensemble model significantly outperformed individual baselines.
 
 | Model Architecture | CV Accuracy | Kaggle Score (Public LB) |
 | :--- | :--- | :--- |
-| Random Forest | 85.4% | - |
-| XGBoost | 86.7% | 0.779 |
-| Logistic Regression | 86.7% | - |
-| **Voting Ensemble (Final)** | **86.5%** | **0.794 (Rank ~600 / 12000)** |
+| Random Forest | 85.9% | - |
+| XGBoost | 86.8% | 0.779 |
+| Logistic Regression | 86.9% | - |
+| **Voting Ensemble (Final)** | **86.6%** | **0.794 (Rank ~600 / 12000)** |
 
 ## The Approach
 
@@ -68,16 +68,16 @@ This project uses **Conda** for dependency management to ensure reproducibility.
 ```plaintext
 titanic-ensemble/
 │
-├── data/                  # Raw and processed CSV files
-├── notebooks/             # Jupyter notebooks for analysis and modeling
-│   ├── 01_Exploratory_Analysis.ipynb
-│   └── 02_Final_Pipeline.ipynb
+├── data/                       # Kaggle datasets
+├── models/                     # Serialized models (.pkl)
+├── src/                        # Python helper modules
+│   ├── preprocessing.py        # Data transformers (impute, encode, feature logic)
+│   └── evaluation.py           # Model tuning & visualization (GridSearch, ROC, Feature Importance)
+├── submissions/                # Kaggle submission files (.csv)
 │
-├── src/                   # Source code for modular scripts
-│   ├── preprocessing.py   # Custom transformers & binning logic
-│   └── ensemble.py        # Voting classifier setup
-│
-├── models/                # Serialized models (.pkl)
-├── environment.yml        # Conda environment definition
-└── README.md              # Project documentation
+├── 01_Exploratory_Analysis.ipynb   # Cleaned EDA & Feature investigation
+├── 02_Final_Pipeline.ipynb         # End-to-end modeling & final solution
+├── Titanic Machine Learning.ipynb  # (Draft/Sandbox) - Original messy notebook
+├── environment.yml                 # Conda environment definition
+└── README.md                       # Project documentation
 ```
