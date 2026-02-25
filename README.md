@@ -20,7 +20,7 @@ The ensemble model significantly outperformed individual baselines.
 ## Technical Approach & Key Insights
 
 ### 1. Advanced Feature Engineering
-* **Family Survival Context:** Rather than treating passengers as isolated data points, grouping them by Surname/Ticket captured the high correlation of family survival (families tended to live or die together). This context boosted model confidence by **~3%**.
+* **Family Survival Context:** Rather than treating passengers as isolated data points, grouping them by Surname/Ticket captured the high correlation of family survival (families tended to live or die together).
 * **Sociological Proxies:** The extracted `Title` feature served as a critical proxy for Age, Gender, and Social Class.
 * **Model-Specific Transformations:** "Human-Logic" binning (e.g., Child vs. Adult) was implemented specifically to aid **Logistic Regression**, recognizing that while Tree models handle continuous splits well, linear models require explicit categorization to capture non-linear risks.
 * **Redundancy Reduction:** Multicollinearity was addressed by dropping raw features like `SibSp`/`Parch` in favor of the derived `FamilySize`, significantly improving model stability.
